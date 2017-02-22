@@ -1,0 +1,35 @@
+syntax = "proto2";
+
+option java_package = "cn.zjnktion.richer.core.protobuf";
+
+enum RequestType {
+    REQUEST_LOGIN = 0;
+    REQUEST_REGISTER = 1;
+    REQUEST_HEARTBEAT = 2;
+    REQUEST_LOGOUT = 3;
+    // 有待扩展
+}
+
+enum ResponseType {
+    RESPONSE_LOGIN = 0;
+    RESPONSE_REGISTER = 1;
+    RESPONSE_HEARTBEAT = 2;
+    RESPONSE_LOGOUT = 3;
+    RESPONSE_DUPLICATE_LOGIN = 4;
+    // 有待扩展
+}
+
+message Request {
+    optional RequestType request_type = 1;
+    optional string access_token = 2; // 业务明文传输的一个标识用户在这台设备验证了登录信息的token，每次登录都会变，且有有效时间
+    optional sint32 seq = 3; // 请求序列，用于服务端内部通信使用，与客户端无关
+    extensions 100 to max; // 100~Integer.MAX用于做消息java类扩展，小于100做基础数据类型字段
+}
+
+message Response {
+    optional ResponseType response_type = 1;
+    optional string access_token = 2; // 请求时候用的token
+    optional int32 code = 3; // 200=请求成功，404=非法请求，连接被断开。。。等等,详情查看对照表
+    optional sint32 seq = 4; // 响应序列，与请求序列对应
+    extensions 100 to max;
+}

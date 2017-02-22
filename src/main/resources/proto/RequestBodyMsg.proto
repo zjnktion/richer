@@ -1,0 +1,43 @@
+syntax = "proto2";
+
+option java_package = "cn.zjnktion.richer.core.protobuf";
+
+import "richer/BusinessMsg.proto";
+
+message LoginRequest {
+    extend Request {
+        optional LoginRequest login_request = 100;
+    }
+
+    optional bool use_token_login = 1; // 是否使用token登录，0表示否，1表示是
+    optional string account = 2;
+    optional string pwd = 3;
+    optional string login_token = 4; // 后台为某个账号登录验证通过之后，用rsa加解密得到的一个唯一登录通用token，永远不会改变，且只要账号和token对的上，即可登录
+}
+
+message RegisterRequest {
+    extend Request {
+        optional RegisterRequest register_request = 101;
+    }
+
+    optional string account = 1;
+    optional string pwd = 2;
+}
+
+message HeartBeatRequest {
+    extend Request {
+        optional HeartBeatRequest heart_beat_request = 102;
+    }
+
+    optional int32 seq = 1;
+}
+
+message LogoutRequest {
+    extend Request {
+        optional LogoutRequest logout_request = 103;
+    }
+
+    optional bool use_token_logout = 1;
+    optional string account = 3;
+    optional string login_token = 4;
+}

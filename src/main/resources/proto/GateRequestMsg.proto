@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+option java_package = "cn.zjnktion.richer.core.protobuf";
+
+message GateRequest {
+    string version = 1;
+}

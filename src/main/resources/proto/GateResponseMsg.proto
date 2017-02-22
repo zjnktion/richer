@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option java_package = "cn.zjnktion.richer.core.protobuf";
+
+message GateResponse {
+    
+    string latest_version = 1;
+    bool need_update = 2;
+    string update_url = 3;
+    string server_ip = 4;
+    int32 server_port = 5;
+}

@@ -1,0 +1,53 @@
+syntax = "proto2";
+
+option java_package = "cn.zjnktion.richer.core.protobuf";
+
+import "richer/BusinessMsg.proto";
+
+message LoginResponse {
+    extend Response {
+        optional LoginResponse login_response = 100;
+    }
+
+    optional bool login_success = 1;
+    optional string account = 2;
+    optional string msg = 3;
+    optional string access_token = 4;
+    optional string login_token = 5;
+}
+
+message RegisterResponse {
+    extend Response {
+        optional RegisterResponse register_response = 101;
+    }
+
+    optional bool register_success = 1;
+    optional string account = 2;
+    optional string msg = 3;
+}
+
+message HeartBeatResponse {
+    extend Response {
+        optional HeartBeatResponse heart_beat_response = 102;
+    }
+
+    optional int32 seq = 1; // 心跳请求的seq
+}
+
+message LogoutResponse {
+    extend Response {
+        optional LogoutResponse logout_response = 103;
+    }
+
+    optional bool logout_success = 1;
+    optional string msg = 3;
+}
+
+message DuplicateLoginResponse {
+    extend Response {
+        optional DuplicateLoginResponse duplicate_login_response = 104;
+    }
+
+    optional string account = 1;
+    optional string msg = 2;
+}
